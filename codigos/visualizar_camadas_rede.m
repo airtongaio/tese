@@ -1,4 +1,4 @@
-% Carregar a rede ResNet-18 pré-treinada
+% Carregar a rede ResNet-18 prÃ©-treinada
 clc;
 rede = net_cocao;
 outputDir = 'D:\bkp_gaio_alienware_m15_r7_1jun2024\doutorado\experimentos_finais\resultado_final\vizualizacoes_net\tucuma\';
@@ -24,13 +24,13 @@ layerNames = {rede.Layers.Name};
 for i = 1:length(layerNames)
     layerName = layerNames{i};
     if isa(rede.Layers(i), 'nnet.cnn.layer.Convolution2DLayer')
-        % Obter as ativações da camada atual
+        % Obter as ativaÃ§Ãµes da camada atual
         act = activations(rede, img, layerName, 'OutputAs', 'channels');
 
-        % Visualizar as ativações
+        % Visualizar as ativaÃ§Ãµes
         figure;
         montage(mat2gray(act), 'Size', [8 8]);
-        title(['Ativações da camada ', layerName]);
+        title(['AtivaÃ§Ãµes da camada ', layerName]);
         
         % Salvar a figura como PNG
         %SSsaveas(gcf, fullfile(outputDir, ['Ativacoes_Camada_' layerName '.png']));
@@ -47,24 +47,24 @@ for i = 1:length(layerNames)
         %A = imtile({img,act_Max});
         %imshow(A);
         imshow(act_Max);
-        title(['Ativação mais Representativa ', layerName]);
+        title(['AtivaÃ§Ã£o mais Representativa ', layerName]);
 
         % Salvar a figura como PNG
         %saveas(gcf, fullfile(outputDir, ['Ativacoes_Mais_Representativa_' layerName '.png']));
         
-        % Calcular a média das ativações ao longo do eixo do canal (terceiro eixo)
+        % Calcular a mÃ©dia das ativaÃ§Ãµes ao longo do eixo do canal (terceiro eixo)
         meanAct = mean(act, 3);
 
-        % Normalizar a média das ativações
+        % Normalizar a mÃ©dia das ativaÃ§Ãµes
         normMeanAct = mat2gray(meanAct);
         
-        % Visualizar a média das ativações
+        % Visualizar a mÃ©dia das ativaÃ§Ãµes
         figure;
         imagesc(normMeanAct);
         colormap('jet');
         colorbar;
         axis off;
-        title(['Média das ativações da camada ', layerName]);
+        title(['MÃ©dia das ativaÃ§Ãµes da camada ', layerName]);
         
         % Salvar a figura como PNG
         %saveas(gcf, fullfile(outputDir, ['Media_ativacoes_' layerName '.png']));
